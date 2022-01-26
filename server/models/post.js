@@ -5,7 +5,6 @@ const PostSchema = new mongoose.Schema({
   title: {
     type: String,
     required: true,
-    index: true,
   },
   contents: {
     type: String,
