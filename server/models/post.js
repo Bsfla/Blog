@@ -12,7 +12,6 @@ const PostSchema = new mongoose.Schema({
   },
   views: {
     type: Number,
-    default: -2,
   },
   fileUrl: {
     type: String,
