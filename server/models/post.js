@@ -21,9 +21,7 @@ const PostSchema = new mongoose.Schema({
     type: String,
     default: moment().format("YYYY-MM-DD hh:mm:ss"),
   },
-  category: {
-    type: mongoose.Schema.Types.ObjectId,
-  },
+  
   comments: [
     {
       type: mongoose.Schema.Types.ObjectId,
