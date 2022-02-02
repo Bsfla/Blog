@@ -1,7 +1,8 @@
-import moongoose from "moongoose";
+import mongoose from "mongoose";
 import moment from "moment";
 
-const UserSchema = new moongoose.Schema({
+// Create Schema
+const UserSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
@@ -44,6 +45,6 @@ const UserSchema = new moongoose.Schema({
   ],
 });
 
-const User = moongoose.model("user", UserSchema);
+const User = mongoose.model("user", UserSchema);
 
 export default User;

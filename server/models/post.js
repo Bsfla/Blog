@@ -5,6 +5,7 @@ const PostSchema = new mongoose.Schema({
   title: {
     type: String,
     required: true,
+    index: true,
   },
   contents: {
     type: String,
@@ -12,6 +13,7 @@ const PostSchema = new mongoose.Schema({
   },
   views: {
     type: Number,
+    default: -2,
   },
   fileUrl: {
     type: String,
@@ -21,7 +23,10 @@ const PostSchema = new mongoose.Schema({
     type: String,
     default: moment().format("YYYY-MM-DD hh:mm:ss"),
   },
-  
+  category: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "category",
+  },
   comments: [
     {
       type: mongoose.Schema.Types.ObjectId,
