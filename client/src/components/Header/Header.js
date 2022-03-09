@@ -14,6 +14,7 @@ const HeaderStyle = styled.header`
   justify-content: center;
   border-bottom: 1px;
 `;
+
 const Header = () => {
   return (
     <HeaderStyle>
