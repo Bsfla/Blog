@@ -8,10 +8,10 @@ const loginUserApi = (loginData) => {
 
 function* loginUser(action) {
     try {
-       const result = yield call(loginUserApi, action.payload);
+       const result = yield call(loginUserApi, action.data);
        yield put({
            type: LOGIN_SUCCESS,
-           payload: action.payload
+           payload: action.data
        })
     } catch(e) {
         yield put({
@@ -22,6 +22,7 @@ function* loginUser(action) {
 }
 
 function* watchLoginUser() {
+
     yield takeEvery(LOGIN_REQUEST, loginUser)
 }
 

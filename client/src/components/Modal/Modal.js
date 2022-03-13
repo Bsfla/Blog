@@ -17,7 +17,7 @@ const ModalStyle = styled.div`
 `
 const ModalWrapper = styled.div`
   width: 500px;
-  height: 320px;
+  height: auto;
   background-color: white;
   position: fixed;
   top: 30px;
@@ -59,15 +59,24 @@ const SubmitButton = styled.button`
    color: white;
    width: 35em;
    padding: 15px;
-   margin-top: 30px;
+   margin: 30px 0px;
    border: none;
    outline: none;
    cursor: pointer;
    
 `
+const AlertErrorMsg = styled.div`
+  background-color: #f8bbd0;
+  width: 45em;
+  padding: 10px;
+  font-size: 10px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+`
 
 
-const Modal = () => {
+const Modal = ({onChange, onSubmit, form, localMessage }) => {
     return (
         <ModalStyle>
             <ModalWrapper>
@@ -75,11 +84,12 @@ const Modal = () => {
                   <h3>Login</h3>
                   <MdClose size={20}/>
                </ModalHeader>
-               <ModalForm>
+               <ModalForm onSubmit={onSubmit}>
+               {localMessage.length ? <AlertErrorMsg><span>{localMessage}</span></AlertErrorMsg>  : null}
                   <label>Email</label>
-                  <input placeholder="Email"></input>
+                  <input placeholder="Email" name='email' value={form.email} onChange={onChange} />
                   <label>Password</label>
-                  <input placeholder="Password"></input>
+                  <input placeholder="Password" name='password' type='password' value={form.password} onChange={onChange} />
                   <SubmitButton>Login</SubmitButton>
                </ModalForm>
             </ModalWrapper>

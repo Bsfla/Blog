@@ -1,7 +1,7 @@
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import AppNavBar from "./components/AppNavBar/AppNavBar";
-import Modal from "./components/Modal/Modal";
+import LoginContainer from "./containers/LoginRegisterContainer/LoginContainer";
 import GlobalStyle from "./styles/GlobalStyle";
 import { useState } from "react";
 
@@ -12,8 +12,8 @@ function App() {
       <GlobalStyle />
       <AppNavBar />
       <Header />
-      <button onClick={() => setOpen(true)}></button>
-      {open ? <Modal /> : null}
+      <button onClick={() => setOpen(true)} />
+      {open ? <LoginContainer /> : null}
       <h1>Hello Boddy</h1>
       <Footer />
     </>
