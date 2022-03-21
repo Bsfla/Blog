@@ -76,7 +76,7 @@ const AlertErrorMsg = styled.div`
 `
 
 
-const Modal = ({onChange, onSubmit, form, localMessage }) => {
+const Modal = ({ onChange, onSubmit, form, localMessage }) => {
     return (
         <ModalStyle>
             <ModalWrapper>

@@ -23,7 +23,6 @@ const LoginContainer = () => {
             ...form,
             [e.target.name] : e.target.value
         })
-        console.log(form);
     }
 
     const onSubmit = (e) => {
@@ -38,9 +37,13 @@ const LoginContainer = () => {
 
     }
 
+    const handleToggle = () => {
+        setModal(false);
+    }
+
 
     return (
-        <Modal onChange={onChange} form={form} onSubmit={onSubmit} localMessage={localMessage} />
+        <Modal onChange={onChange} form={form} onSubmit={onSubmit} handleToggle={handleToggle} localMessage={localMessage} />
     )
 }
 
