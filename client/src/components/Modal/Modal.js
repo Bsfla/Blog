@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { MdClose } from 'react-icons/md';
 
 const ModalStyle = styled.div`
-  display: flex;
+  display: ${(props) => props.open ? 'flex' : 'none'};
   justify-content: center;
   width: 100vw;
   height: 100vh;
@@ -76,21 +76,23 @@ const AlertErrorMsg = styled.div`
 `
 
 
-const Modal = ({ onChange, onSubmit, form, localMessage }) => {
+const Modal = ({ onChange, onSubmit, form, localMessage, open, setOpen, isAuth }) => {
     return (
-        <ModalStyle>
+        <ModalStyle open={open} >
             <ModalWrapper>
                <ModalHeader>
-                  <h3>Login</h3>
-                  <MdClose size={20}/>
+                  <h3>{isAuth.login ? 'Login' : 'Register'}</h3>
+                  <MdClose size={20} onClick={() => setOpen(false)}/>
                </ModalHeader>
                <ModalForm onSubmit={onSubmit}>
                {localMessage.length ? <AlertErrorMsg><span>{localMessage}</span></AlertErrorMsg>  : null}
+               {isAuth.register ? <> <label>Name</label>
+                  <input placeholder="Name" name='name' value={form.name} onChange={onChange} /> </> : null} 
                   <label>Email</label>
                   <input placeholder="Email" name='email' value={form.email} onChange={onChange} />
                   <label>Password</label>
                   <input placeholder="Password" name='password' type='password' value={form.password} onChange={onChange} />
-                  <SubmitButton>Login</SubmitButton>
+                  <SubmitButton>{isAuth.login ? 'Login' : 'Register'}</SubmitButton>
                </ModalForm>
             </ModalWrapper>
         </ModalStyle>

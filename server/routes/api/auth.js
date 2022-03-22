@@ -58,7 +58,7 @@ router.get("/user", auth, async (req, res) => {
   try {
     const user = await User.findById(req.user.id).select("-password");
     if (!user) throw Error("유저가 존재하지 않습니다");
-    res.json(user);
+    res.status(200).json(user, {success: "로그인 성공"});
   } catch (e) {
     console.log(e);
     res.status(400).json({ msg: e.message });

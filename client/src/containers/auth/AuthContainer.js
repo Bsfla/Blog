@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Modal from "../../components/Modal/Modal";
-import { LOGIN_REQUEST } from "../../redux/types";
+import { LOGIN_REQUEST, REGISTER_REQUEST } from "../../redux/types";
 
-const LoginContainer = () => {
-    const [modal, setModal] = useState(false);
+const AuthContainer = ({open, setOpen, isAuth}) => {
     const [form, setForm] = useState({
         email: "",
-        password: ""
+        password: "",
+        name: ""
     });
     const [localMessage, setLocalMessage] = useState('');
     const { errorMsg } = useSelector(state => state.auth);
@@ -27,24 +27,23 @@ const LoginContainer = () => {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        const {email, password} = form;
-        const user = {email, password};
-        
-        dispatch({
+        const {email, password, name} = form;
+
+        if (isAuth.register) dispatch({
+            type: REGISTER_REQUEST,
+            data: {email, name, password}
+        })
+        else dispatch({
             type: LOGIN_REQUEST,
-            data: user
+            data: {email, password}
         })
 
     }
 
-    const handleToggle = () => {
-        setModal(false);
-    }
-
 
     return (
-        <Modal onChange={onChange} form={form} onSubmit={onSubmit} handleToggle={handleToggle} localMessage={localMessage} />
+        <Modal onChange={onChange} form={form} onSubmit={onSubmit}  localMessage={localMessage} open={open} setOpen={setOpen} isAuth={isAuth}  />
     )
 }
 
-export default LoginContainer;
+export default AuthContainer;
