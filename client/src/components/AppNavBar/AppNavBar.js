@@ -17,7 +17,7 @@ const NavBarStyle = styled.nav`
   }
 `;
 
-const AuthStyle = styled.div`
+const NavBarMenu = styled.div`
   span {
     color: white;
     margin-right: 20px;
@@ -33,7 +33,6 @@ const AppNavBar = () => {
   });
 
   const handleToggle = (isLogin) => {
-       console.log(1);
        setOpen(!open);
      
       isLogin ? setIsAuth({
@@ -51,10 +50,10 @@ const AppNavBar = () => {
         <span>
           Side Project(Bs Blog)
         </span>
-        <AuthStyle>
+        <NavBarMenu>
           <span onClick={() => handleToggle(1)}>Login</span>
           <span onClick={() => handleToggle()}>Register</span>
-        </AuthStyle>
+        </NavBarMenu>
     </NavBarStyle>
     <AuthContainer open={open} setOpen={setOpen} isAuth={isAuth} />
     </>

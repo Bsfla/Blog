@@ -16,7 +16,12 @@ const AuthContainer = ({open, setOpen, isAuth}) => {
 
     useEffect(() => {
        setLocalMessage(errorMsg);
-    },[errorMsg]);
+       setForm({
+        email: "",
+        password: "",
+        name: ""
+       });
+    },[errorMsg, open]);
 
     const onChange = (e) => {
         setForm({
@@ -28,6 +33,7 @@ const AuthContainer = ({open, setOpen, isAuth}) => {
     const onSubmit = (e) => {
         e.preventDefault();
         const {email, password, name} = form;
+        console.log(form);
 
         if (isAuth.register) dispatch({
             type: REGISTER_REQUEST,
@@ -37,6 +43,8 @@ const AuthContainer = ({open, setOpen, isAuth}) => {
             type: LOGIN_REQUEST,
             data: {email, password}
         })
+
+        setOpen(false);
 
     }
 
