@@ -2,7 +2,7 @@ import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import AppNavBar from "./components/AppNavBar/AppNavBar";
 import GlobalStyle from "./styles/GlobalStyle";
-import { useState } from "react";
+import Routing from "./routes/Routing";
 
 function App() {
   return (
@@ -10,7 +10,7 @@ function App() {
       <GlobalStyle />
       <AppNavBar />
       <Header />
-      <h1>Hello Boddy</h1>
+      <Routing />
       <Footer />
     </>
   );

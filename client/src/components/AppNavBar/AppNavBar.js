@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import AuthContainer from '../../containers/auth/AuthContainer'
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
 
 const NavBarStyle = styled.nav`
@@ -50,6 +51,7 @@ const AppNavBar = () => {
         <span>
           Side Project(Bs Blog)
         </span>
+
         <NavBarMenu>
           <span onClick={() => handleToggle(1)}>Login</span>
           <span onClick={() => handleToggle()}>Register</span>

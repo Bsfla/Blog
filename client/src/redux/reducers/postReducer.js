@@ -9,7 +9,7 @@ const initialState = {
     loading: true
 };
 
-const postReducer = (state = initialState, action) => {
+export const postReducer = (state = initialState, action) => {
     switch (action.type) {
         case POST_REQUEST :
             return {
