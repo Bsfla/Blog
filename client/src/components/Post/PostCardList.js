@@ -12,7 +12,6 @@ const PostList = () => {
 
 const Wrapper = styled.div`
    width: 90%;
-   height: 100vh;
 `
 
 export default PostList;

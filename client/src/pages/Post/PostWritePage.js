@@ -1,12 +1,11 @@
 import React from "react";
-import Spinner from "../components/Spinner/Spinner";
-import PostListContainer from "../containers/post/PostListContainer";
 import styled from "styled-components";
+import PostWrite from "../../components/Post/PostWrite";
 
-const HomePage = () => {
+const PostWritePage = () => {
     return (
         <Wrapper>
-          <PostListContainer />
+           <PostWrite />
         </Wrapper>
     )
 }
@@ -17,4 +16,4 @@ const Wrapper = styled.div`
   height: 100vh;
 `
 
-export default HomePage;
+export default PostWritePage;
