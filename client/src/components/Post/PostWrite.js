@@ -1,19 +1,11 @@
 import React from "react";
-import { CKEditor } from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "@ckeditor/ckeditor5-editor-classic/src/classiceditor";
-import Essentials from '@ckeditor/ckeditor5-essentials/src/essentials';
-import Bold from '@ckeditor/ckeditor5-basic-styles/src/bold';
-import Italic from '@ckeditor/ckeditor5-basic-styles/src/italic';
-import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph';
+import QuilEditor from "../Editor/QuilEditor";
+
+
 
 import styled from "styled-components";
 
 const PostWrite = () => {
-
-const editorConfiguration = {
-    plugins: [ Essentials, Bold, Italic, Paragraph ],
-    toolbar: [ 'bold', 'italic' ]
-};
     return (
        <Wrapper>
         <WriteFormGroup>
@@ -22,12 +14,8 @@ const editorConfiguration = {
             <label>Category</label>
             <input />
             <label>Content</label>
-            <CKEditor 
-              editor={ClassicEditor}
-              config={editorConfiguration}
-            
-            />
-            
+            <QuilEditor />
+            <AddPostButton>제출하기</AddPostButton>
         </WriteFormGroup>
        </Wrapper>
     )
@@ -40,10 +28,11 @@ export default PostWrite;
 
 const Wrapper = styled.div`
   width: 70%;
+  height: auto;
 `
 const WriteFormGroup = styled.form`
   width: 100%;
-  height: 100%;
+  position: relative;
   label {
       margin-top: 20px;
       display: block;
@@ -55,6 +44,13 @@ const WriteFormGroup = styled.form`
       height: 30px;
   }
 `
-const WriteForm = styled.div`
-  
+const AddPostButton = styled.button`
+  width: 15em;
+  background-color: green;
+  color: white;
+  padding: 5px;
+  position: absolute;
+  right: 0;
+  cursor: pointer;
+  margin-top: 20px;
 `

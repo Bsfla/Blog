@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 const fs = require('fs');
 const path = require('path');
@@ -84,8 +84,6 @@ const hasJsxRuntime = (() => {
     return false;
   }
 })();
-
-
 
 // This is the production and development configuration.
 // It is focused on developer experience, fast rebuilds, and a minimal bundle.
@@ -339,7 +337,6 @@ module.exports = function (webpackEnv) {
     module: {
       strictExportPresence: true,
       rules: [
-       
         // Handle node_modules packages that contain sourcemaps
         shouldUseSourceMap && {
           enforce: 'pre',
@@ -394,14 +391,7 @@ module.exports = function (webpackEnv) {
                 {
                   loader: require.resolve('file-loader'),
                   options: {
-                    exclude: [
-                      /\.(js|mjs|jsx|ts|tsx)$/,
-                      /\.html$/,
-                      /\.json$/,
-                      /ckeditor5-[^/\\]+[/\\]theme[/\\]icons[/\\][^/\\]+\.svg$/,
-                      /ckeditor5-[^/\\]+[/\\]theme[/\\].+\.css$/
-                  ],
-                  name: 'static/media/[name].[hash:8].[ext]',
+                    name: 'static/media/[name].[hash].[ext]',
                   },
                 },
               ],
@@ -469,8 +459,6 @@ module.exports = function (webpackEnv) {
                 inputSourceMap: shouldUseSourceMap,
               },
             },
-           
-            
             // "postcss" loader applies autoprefixer to our CSS.
             // "css" loader resolves paths in CSS and adds assets as dependencies.
             // "style" loader turns CSS into JS modules that inject <style> tags.
@@ -480,10 +468,7 @@ module.exports = function (webpackEnv) {
             // By default we support CSS Modules with the extension .module.css
             {
               test: cssRegex,
-              exclude: [
-                cssModuleRegex,
-                /ckeditor5-[^/\\]+[/\\]theme[/\\].+\.css$/,
-            ],
+              exclude: cssModuleRegex,
               use: getStyleLoaders({
                 importLoaders: 1,
                 sourceMap: isEnvProduction
@@ -503,9 +488,6 @@ module.exports = function (webpackEnv) {
             // using the extension .module.css
             {
               test: cssModuleRegex,
-              exclude: [
-                /ckeditor5-[^/\\]+[/\\]theme[/\\].+\.css$/,
-            ],
               use: getStyleLoaders({
                 importLoaders: 1,
                 sourceMap: isEnvProduction

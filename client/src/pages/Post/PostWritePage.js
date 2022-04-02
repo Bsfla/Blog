@@ -14,6 +14,7 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   height: 100vh;
+  margin-bottom: 70px;
 `
 
 export default PostWritePage;

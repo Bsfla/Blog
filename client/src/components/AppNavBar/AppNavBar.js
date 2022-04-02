@@ -3,7 +3,8 @@ import styled from "styled-components";
 import AuthContainer from '../../containers/auth/AuthContainer';
 import { Link } from 'react-router-dom';
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { LOGOUT_REQUEST } from "../../redux/types";
 
 const AppNavBar = () => {
   const [open, setOpen] = useState(false);
@@ -13,16 +14,17 @@ const AppNavBar = () => {
   });
   const { isAuthenticated } = useSelector(state => state.auth);
   const user = useSelector(state => state.auth.user);
+  const dispatch = useDispatch();
 
   const handleToggle = (isLogin) => {
        setOpen(!open);
      
       isLogin ? setIsAuth({
-        login: !isAuth.login,
+        login: true,
         register: false
       }) : setIsAuth({
         login: false,
-        register: !isAuth.register
+        register: true
       })
   }
 
@@ -35,8 +37,10 @@ const AppNavBar = () => {
         {isAuthenticated ? (<NavBarMenu>
              <Link to='/postwrite'>
                <AddPostButton>Add Post</AddPostButton>
+              </Link>
                <span>환영합니다 {user.name}</span>
-               </Link>
+               <span onClick={() => dispatch({type: LOGOUT_REQUEST})}>LogOut</span>
+               
         </NavBarMenu>) : (
         <NavBarMenu>
           <span onClick={() => handleToggle(1)}>Login</span>
