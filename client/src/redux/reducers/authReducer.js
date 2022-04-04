@@ -1,4 +1,4 @@
-import { LOGIN_SUCCESS, LOGIN_FAILURE, LOGIN_REQUEST, LOGOUT_FAILURE, LOGOUT_SUCCESS, LOGOUT_REQUEST } from "../types"
+import { LOGIN_SUCCESS, LOGIN_FAILURE, LOGIN_REQUEST, LOGOUT_FAILURE, LOGOUT_SUCCESS, LOGOUT_REQUEST, REGISTER_FAILURE, REGISTER_SUCCESS } from "../types"
 const initialState = {
     token: localStorage.getItem('token'),
     isAuthenticated: null,
@@ -8,7 +8,8 @@ const initialState = {
     userName: "",
     userRole: "",
     errorMsg: "",
-    successMsg: ""
+    successMsg: "",
+    registerMsg: false,
 }
 
 const authReducer = (state = initialState, action) => {
@@ -31,6 +32,12 @@ const authReducer = (state = initialState, action) => {
                 userRole: action.payload.userRole,
                 errorMsg: ""
             }
+        case REGISTER_SUCCESS :
+            return {
+                ...state,
+                registerMsg: true
+            }
+        case REGISTER_FAILURE :
         case LOGOUT_FAILURE :
         case LOGIN_FAILURE :
             localStorage.removeItem('token')
