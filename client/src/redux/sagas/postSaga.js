@@ -2,11 +2,11 @@ import axios from "axios"
 import { all, call, put, takeEvery, fork } from "redux-saga/effects";
 import { POSTLOADING_FAILURE, POSTLOADING_SUCCESS, POST_REQUEST } from "../types";
 
-const loadPostAPI = () => {
-    return axios.get('api/post');
+const loadPostAPI = (payload) => {
+    return axios.get(`/api/post/skip/${payload}`);
 }
 
-function* loadPost() {
+function* loadPosts() {
     const result = yield call(loadPostAPI);
 
     try {
@@ -23,7 +23,7 @@ function* loadPost() {
 }
 
 function* watchLoadPosts() {
-    yield takeEvery(POST_REQUEST, loadPost);
+    yield takeEvery(POST_REQUEST, loadPosts);
 }
 
 export default function* postSaga() {
