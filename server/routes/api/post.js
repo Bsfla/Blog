@@ -34,7 +34,7 @@ router.post("/", auth, async (req, res, next) => {
     const newPost = await Post.create({
       title,
       contents,
-      creator,
+      creator: req.user.id,
       date: moment().format("YYYY-MM-DD hh:mm:ss"),
     });
 

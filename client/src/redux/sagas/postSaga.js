@@ -6,8 +6,8 @@ const loadPostAPI = (payload) => {
     return axios.get(`/api/post/skip/${payload}`);
 }
 
-function* loadPosts() {
-    const result = yield call(loadPostAPI);
+function* loadPosts(action) {
+    const result = yield call(loadPostAPI, action.payload);
 
     try {
         yield put({
