@@ -1,15 +1,18 @@
 import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import PostWrite from "../../components/Post/PostWrite";
+import { POSTUPLOAD_REQUEST } from "../../redux/types";
+import { useNavigate } from "react-router-dom";
 
 const PostWriteContainer = () => {
   const [form, setForm] = useState({
     title: "",
     category: "",
-    description: "",
+    contents: "",
   });
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const onChange = (e) => {
     setForm({
       ...form,
@@ -19,9 +22,16 @@ const PostWriteContainer = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    const { title, category, description } = form;
+    const { title, category, contents } = form;
     const token = localStorage.getItem("token");
-    const body = { title, category, description, token };
+    const body = { title, category, contents, token };
+    console.log(contents);
+
+    dispatch({
+      type: POSTUPLOAD_REQUEST,
+      payload: body,
+      navigate,
+    });
   };
 
   return (

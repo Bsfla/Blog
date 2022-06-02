@@ -5,6 +5,8 @@ import Post from "../../models/post";
 import auth from "../../middleware/auth";
 import Category from "../../models/category";
 import User from "../../models/user";
+import moment from "moment";
+import { isNullOrUndefined } from "util";
 
 const router = express.Router();
 
@@ -29,8 +31,7 @@ router.get("/skip/:skip", async (req, res) => {
 
 router.post("/", auth, async (req, res, next) => {
   try {
-    console.log(req, "req");
-    const { title, contents, creator, category } = req.body;
+    const { title, contents, category } = req.body;
     const newPost = await Post.create({
       title,
       contents,
@@ -41,6 +42,8 @@ router.post("/", auth, async (req, res, next) => {
     const findResult = await Category.findOne({
       categoryName: category,
     });
+
+    console.log(new)
 
     if (isNullOrUndefined(findResult)) {
       const newCategory = await Category.create({

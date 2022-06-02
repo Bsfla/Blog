@@ -30,7 +30,6 @@ const userLoadingApi = (token) => {
     },
   };
   if (token) {
-    console.log(token);
     config.headers["x-auth-token"] = token;
   }
   return axios.get("api/auth/user", config);

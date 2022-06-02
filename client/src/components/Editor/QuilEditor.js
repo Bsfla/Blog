@@ -25,11 +25,11 @@ const QuilEditor = ({ setForm, form }) => {
       <ReactQuillEditor
         modules={modules}
         theme="snow"
-        name="description"
+        name="contents"
         onChange={(e) =>
           setForm({
             ...form,
-            description: e,
+            contents: e,
           })
         }
       />
