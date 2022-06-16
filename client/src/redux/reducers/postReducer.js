@@ -1,4 +1,6 @@
 import {
+  POSTDETAILLOAD_REQUEST,
+  POSTDETAILLOAD_SUCCESS,
   POSTLOADING_FAILURE,
   POSTLOADING_SUCCESS,
   POSTUPLOAD_FAILURE,
@@ -26,7 +28,7 @@ export const postReducer = (state = initialState, action) => {
     case POSTLOADING_SUCCESS:
       return {
         ...state,
-        posts: [...state.posts, action.payload],
+        posts: [...state, action.payload],
       };
     case POSTLOADING_FAILURE:
       return {
@@ -49,6 +51,19 @@ export const postReducer = (state = initialState, action) => {
         ...state,
         error: action.payload,
         loading: false,
+      };
+    case POSTDETAILLOAD_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case POSTDETAILLOAD_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        postDetail: action.payload.contents,
+        creatorId: action.payload.creator.name,
+        title: action.payload.title,
       };
     default:
       return state;

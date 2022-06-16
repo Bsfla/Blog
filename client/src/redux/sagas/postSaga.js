@@ -1,6 +1,9 @@
 import axios from "axios";
 import { all, call, put, takeEvery, fork } from "redux-saga/effects";
 import {
+  POSTDETAILLOAD_FAILURE,
+  POSTDETAILLOAD_REQUEST,
+  POSTDETAILLOAD_SUCCESS,
   POSTLOADING_FAILURE,
   POSTLOADING_SUCCESS,
   POSTUPLOAD_FAILURE,
@@ -18,7 +21,7 @@ function* loadPosts(action) {
     const result = yield call(loadPostAPI, action.payload);
     yield put({
       type: POSTLOADING_SUCCESS,
-      payload: result.data,
+      payload: result.data.postFindResult,
     });
   } catch (e) {
     yield put({
@@ -50,20 +53,17 @@ const upLoadPostApi = (payload) => {
 
 function* upLoadPosts(action) {
   try {
-    console.log("ss");
     const result = yield call(upLoadPostApi, action.payload);
     yield put({
       type: POSTUPLOAD_SUCCESS,
       payload: result.data,
     });
-    console.log(result);
-    yield put(action.navigate(`/post/${result.data._id}`));
+    yield put(action.navigate("/"));
   } catch (e) {
     yield put({
       type: POSTUPLOAD_FAILURE,
       payload: e,
     });
-
     yield put(action.navigate("/"));
   }
 }
@@ -72,6 +72,32 @@ function* watchUploadPost() {
   yield takeEvery(POSTUPLOAD_REQUEST, upLoadPosts);
 }
 
+function loadPostDetailApi(id) {
+  return axios.get(`/api/post/${id}`);
+}
+function* loadDeatilPost(action) {
+  const result = yield call(loadPostDetailApi, action.payload);
+
+  try {
+    yield put({
+      type: POSTDETAILLOAD_SUCCESS,
+      payload: result.data,
+    });
+  } catch (e) {
+    yield put({
+      type: POSTDETAILLOAD_FAILURE,
+      payload: e,
+    });
+  }
+}
+function* watchLoadPostDetail() {
+  yield takeEvery(POSTDETAILLOAD_REQUEST, loadDeatilPost);
+}
+
 export default function* postSaga() {
-  yield all([fork(watchLoadPosts), fork(watchUploadPost)]);
+  yield all([
+    fork(watchLoadPosts),
+    fork(watchUploadPost),
+    fork(watchLoadPostDetail),
+  ]);
 }

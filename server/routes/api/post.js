@@ -31,7 +31,9 @@ router.get("/skip/:skip", async (req, res) => {
 
 router.post("/", auth, async (req, res, next) => {
   try {
-    const { title, contents, category } = req.body;
+    console.log(req, "req");
+
+    const { title, contents, creator, category } = req.body; //구조 분해 문법
     const newPost = await Post.create({
       title,
       contents,
@@ -43,19 +45,22 @@ router.post("/", auth, async (req, res, next) => {
       categoryName: category,
     });
 
-    console.log(new)
+    console.log(findResult, "Find Result!!");
 
     if (isNullOrUndefined(findResult)) {
       const newCategory = await Category.create({
         categoryName: category,
       });
       await Post.findByIdAndUpdate(newPost._id, {
-        $push: { category: newCategory._id },
+        $push: {
+          category: newCategory._id,
+        },
       });
       await Category.findByIdAndUpdate(newCategory._id, {
-        $push: { posts: newPost._id },
+        $push: {
+          posts: newPost._id,
+        },
       });
-
       await User.findByIdAndUpdate(req.user.id, {
         $push: {
           posts: newPost._id,
@@ -63,7 +68,9 @@ router.post("/", auth, async (req, res, next) => {
       });
     } else {
       await Category.findByIdAndUpdate(findResult._id, {
-        $push: { poss: newPost._id },
+        $push: {
+          posts: newPost._id,
+        },
       });
       await Post.findByIdAndUpdate(newPost._id, {
         category: findResult._id,
@@ -74,7 +81,7 @@ router.post("/", auth, async (req, res, next) => {
         },
       });
     }
-    return res.redirect("/api/post/${newPost._id");
+    return res.redirect(`/api/post/${newPost._id}`);
   } catch (e) {
     console.log(e);
   }
