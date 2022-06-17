@@ -4,17 +4,7 @@ import PostListContainer from "../containers/post/PostListContainer";
 import styled from "styled-components";
 
 const HomePage = () => {
-    return (
-        <Wrapper>
-          <PostListContainer />
-        </Wrapper>
-    )
-}
-
-const Wrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  height: 100vh;
-`
+  return <PostListContainer />;
+};
 
 export default HomePage;

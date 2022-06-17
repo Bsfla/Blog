@@ -77,6 +77,7 @@ function loadPostDetailApi(id) {
 }
 function* loadDeatilPost(action) {
   const result = yield call(loadPostDetailApi, action.payload);
+  console.log(result);
 
   try {
     yield put({

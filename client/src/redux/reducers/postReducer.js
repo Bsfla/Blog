@@ -16,6 +16,9 @@ const initialState = {
   creatorId: "",
   title: "",
   loading: true,
+  category: "",
+  views: 0,
+  date: "",
 };
 
 export const postReducer = (state = initialState, action) => {
@@ -64,6 +67,9 @@ export const postReducer = (state = initialState, action) => {
         postDetail: action.payload.contents,
         creatorId: action.payload.creator.name,
         title: action.payload.title,
+        category: action.payload.category.categoryName,
+        views: action.payload.views,
+        date: action.payload.date,
       };
     default:
       return state;
