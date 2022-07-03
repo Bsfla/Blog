@@ -25,8 +25,7 @@ const PostWriteContainer = () => {
     const { title, category, contents } = form;
     const token = localStorage.getItem("token");
     const body = { title, category, contents, token };
-    console.log(contents);
-
+        
     dispatch({
       type: POSTUPLOAD_REQUEST,
       payload: body,

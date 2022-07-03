@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { FaPen, FaMouse } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import Comments from "../Comment/Comments";
 
 const PostDetail = ({ post }) => {
   return (
@@ -31,6 +32,7 @@ const PostDetail = ({ post }) => {
         </Views>
       </DateViews>
       <PostContent dangerouslySetInnerHTML={{ __html: post.postDetail }} />
+      <Comments />
     </Wrapper>
   );
 };
@@ -115,7 +117,9 @@ const Views = styled.span`
 
 const PostContent = styled.div`
   width: 100%;
-  height: 100vh;
+  min-height: 20em;
   font-weight: bold;
+  border-bottom-color: #ab47bc;
+  padding-bottom: 50px;
 `;
 export default PostDetail;
