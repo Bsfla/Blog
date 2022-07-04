@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { FaPen, FaMouse } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import Comments from "../Comment/Comments";
+import CommentContainer from "../../containers/comment/CommentContainer";
 
 const PostDetail = ({ post }) => {
   return (
@@ -32,7 +32,7 @@ const PostDetail = ({ post }) => {
         </Views>
       </DateViews>
       <PostContent dangerouslySetInnerHTML={{ __html: post.postDetail }} />
-      <Comments />
+      <CommentContainer />
     </Wrapper>
   );
 };

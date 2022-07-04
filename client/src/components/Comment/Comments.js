@@ -1,8 +1,13 @@
 import React from "react";
 import styled from "styled-components";
+import AddComment from "./AddComment";
 
-const Comments = () => {
-  return <Wrapper>sa</Wrapper>;
+const Comments = ({ onChange, onSubmit }) => {
+  return (
+    <Wrapper>
+      <AddComment onChange={onChange} onSubmit={onSubmit} />
+    </Wrapper>
+  );
 };
 
 const Wrapper = styled.div`
