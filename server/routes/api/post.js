@@ -33,7 +33,7 @@ router.post("/", auth, async (req, res, next) => {
   try {
     console.log(req, "req");
 
-    const { title, contents, creator, category } = req.body; //구조 분해 문법
+    const { title, contents, category } = req.body; //구조 분해 문법
     const newPost = await Post.create({
       title,
       contents,
@@ -91,7 +91,10 @@ router.get("/:id", async (req, res, next) => {
   try {
     const post = await Post.findById(req.params.id)
       .populate("creator", "name")
-      .populate({ path: "category", select: "categoryName" });
+      .populate({
+        path: "category",
+        select: "categoryName",
+      });
     post.views += 1;
     post.save();
     console.log(post);

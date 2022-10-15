@@ -7,7 +7,7 @@ const createRootReducer = (history) =>
   combineReducers({
     auth: authReducer,
     post: postReducer,
-    comment: commentReduer,
+    comments: commentReduer,
   });
 
 export default createRootReducer;

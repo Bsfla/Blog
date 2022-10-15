@@ -19,11 +19,13 @@ const loadPostAPI = (payload) => {
 function* loadPosts(action) {
   try {
     const result = yield call(loadPostAPI, action.payload);
+    console.log(result.data.postFindResult);
     yield put({
       type: POSTLOADING_SUCCESS,
       payload: result.data.postFindResult,
     });
   } catch (e) {
+    console.log(e);
     yield put({
       type: POSTLOADING_FAILURE,
       payload: e,
@@ -54,17 +56,17 @@ const upLoadPostApi = (payload) => {
 function* upLoadPosts(action) {
   try {
     const result = yield call(upLoadPostApi, action.payload);
+
     yield put({
       type: POSTUPLOAD_SUCCESS,
       payload: result.data,
     });
-    yield put(action.navigate("/"));
+    yield put(action.navigate(`/post/${result.data._id}`));
   } catch (e) {
     yield put({
       type: POSTUPLOAD_FAILURE,
       payload: e,
     });
-    yield put(action.navigate("/"));
   }
 }
 
@@ -76,10 +78,9 @@ function loadPostDetailApi(id) {
   return axios.get(`/api/post/${id}`);
 }
 function* loadDeatilPost(action) {
-  const result = yield call(loadPostDetailApi, action.payload);
-  console.log(result);
-
   try {
+    const result = yield call(loadPostDetailApi, action.payload);
+
     yield put({
       type: POSTDETAILLOAD_SUCCESS,
       payload: result.data,

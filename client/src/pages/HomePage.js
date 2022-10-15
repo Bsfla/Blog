@@ -1,10 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Spinner from "../components/Spinner/Spinner";
-import PostListContainer from "../containers/post/PostListContainer";
-import styled from "styled-components";
+import { useSelector, useDispatch } from "react-redux";
+import PostList from "../components/Post/PostCardList";
+import { POST_REQUEST } from "../redux/types";
 
 const HomePage = () => {
-  return <PostListContainer />;
+  const dispatch = useDispatch();
+  const posts = useSelector((state) => state.post.posts);
+  console.log(posts);
+
+  useEffect(() => {
+    dispatch({ type: POST_REQUEST, payload: 0 });
+  }, [dispatch]);
+
+  return <PostList posts={posts} />;
 };
 
 export default HomePage;

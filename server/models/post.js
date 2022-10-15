@@ -1,10 +1,11 @@
 import mongoose from "mongoose";
 import moment from "moment";
 
+//Create Schema
 const PostSchema = new mongoose.Schema({
   title: {
     type: String,
-    required: true,
+    required: true, //필수 입력
     index: true,
   },
   contents: {
@@ -13,19 +14,19 @@ const PostSchema = new mongoose.Schema({
   },
   views: {
     type: Number,
-    default: -2,
+    default: 0,
   },
   fileUrl: {
     type: String,
     default: "https://source.unsplash.com/random/301x201",
   },
-  date: {
-    type: String,
-    default: moment().format("YYYY-MM-DD hh:mm:ss"),
-  },
   category: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "category",
+  },
+  date: {
+    type: String,
+    default: moment().format("YYYY-MM-DD hh:mm:ss"),
   },
   comments: [
     {
@@ -33,10 +34,12 @@ const PostSchema = new mongoose.Schema({
       ref: "comment",
     },
   ],
-  creator: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "user",
-  },
+  creator: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "user",
+    },
+  ],
 });
 
 const Post = mongoose.model("post", PostSchema);

@@ -31,7 +31,8 @@ export const postReducer = (state = initialState, action) => {
     case POSTLOADING_SUCCESS:
       return {
         ...state,
-        posts: [...state, action.payload],
+        posts: [...action.payload],
+        isLoadig: false,
       };
     case POSTLOADING_FAILURE:
       return {

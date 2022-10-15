@@ -3,21 +3,21 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMouse } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
 
-const PostCard = () => {
+const PostCard = ({ post }) => {
+  const { title, fileUrl, views, date } = post;
   return (
     <Card>
       <CardImage>
-        <img src="https://source.unsplash.com/random/301x201" />
+        <img src={fileUrl} alt="postImg" />
       </CardImage>
       <CardInfo>
         <CardTitle>
-          <span>안녕 오늘의 날씨</span>
+          <span>{title}</span>
           <span>
             <FontAwesomeIcon icon={faMouse} />
-            <span>10</span>
+            <span>{views}</span>
           </span>
         </CardTitle>
-        <CardCommentView>More</CardCommentView>
       </CardInfo>
     </Card>
   );
