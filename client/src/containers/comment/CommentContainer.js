@@ -9,12 +9,11 @@ const CommentContainer = () => {
   const token = localStorage.getItem("token");
   const dispatch = useDispatch();
 
-  const onChange = (e) => {
+  const handleCommentChange = (e) => {
     setContents(e.target.value);
   };
 
-  const onSubmit = (e) => {
-    console.log(e);
+  const handleAddComment = (e) => {
     e.preventDefault();
     const body = { id, userName: name, userId: email, token, contents };
     dispatch({
@@ -23,7 +22,12 @@ const CommentContainer = () => {
     });
   };
 
-  return <Comments onChange={onChange} onSubmit={onSubmit} />;
+  return (
+    <Comments
+      handleCommentChange={handleCommentChange}
+      handleAddComment={handleAddComment}
+    />
+  );
 };
 
 export default CommentContainer;
