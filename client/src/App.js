@@ -24,6 +24,8 @@ const Wrapper = styled.div`
   justify-content: center;
   padding-left: 70px;
   padding-right: 70px;
+  min-height: 50rem;
+  background-color: #eeeeee;
 `;
 
 export default App;

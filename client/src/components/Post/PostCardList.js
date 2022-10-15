@@ -13,6 +13,8 @@ const PostList = ({ posts }) => {
 };
 
 const Wrapper = styled.div`
+  display: flex;
+  margin-top: 40px;
   width: 90%;
 `;
 
