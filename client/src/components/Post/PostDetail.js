@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { FaPen, FaMouse } from "react-icons/fa";
 import CommentList from "../Comment/CommentList";
+import AddCommentContainer from "../../containers/comment/AddCommentContainer";
 import { Link } from "react-router-dom";
 
 const PostDetail = ({ post }) => {
@@ -32,7 +33,9 @@ const PostDetail = ({ post }) => {
         </Views>
       </DateViews>
       <PostContent dangerouslySetInnerHTML={{ __html: post.postDetail }} />
-      <CommentList />
+      <CommentSection>
+        <AddCommentContainer />
+      </CommentSection>
     </Wrapper>
   );
 };
@@ -121,5 +124,11 @@ const PostContent = styled.div`
   font-weight: bold;
   border-bottom-color: #ab47bc;
   padding-bottom: 50px;
+`;
+
+const CommentSection = styled.div`
+  width: 100%;
+  height: 100%;
+  border-top: solid #ab47bc;
 `;
 export default PostDetail;
