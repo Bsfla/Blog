@@ -2,6 +2,7 @@ import express from "express";
 
 // Model
 import Post from "../../models/post";
+import Comment from "../../models/comment";
 import auth from "../../middleware/auth";
 import Category from "../../models/category";
 import User from "../../models/user";

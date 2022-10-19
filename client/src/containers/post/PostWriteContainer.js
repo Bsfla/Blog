@@ -5,7 +5,7 @@ import { POSTUPLOAD_REQUEST } from "../../redux/types";
 import { useNavigate } from "react-router-dom";
 
 const PostWriteContainer = () => {
-  const [form, setForm] = useState({
+  const [post, setPost] = useState({
     title: "",
     category: "",
     contents: "",
@@ -13,16 +13,17 @@ const PostWriteContainer = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const onChange = (e) => {
-    setForm({
-      ...form,
+  
+  const handlePostChange = (e) => {
+    setPost({
+      ...post,
       [e.target.name]: e.target.value,
     });
   };
 
   const onSubmit = (e) => {
     e.preventDefault();
-    const { title, category, contents } = form;
+    const { title, category, contents } = post;
     const token = localStorage.getItem("token");
     const body = { title, category, contents, token };
         
@@ -35,9 +36,9 @@ const PostWriteContainer = () => {
 
   return (
     <PostWrite
-      onChange={onChange}
-      form={form}
-      setForm={setForm}
+      handlePostChange={handlePostChange}
+      post={post}
+      setPost={setPost}
       onSubmit={onSubmit}
     />
   );

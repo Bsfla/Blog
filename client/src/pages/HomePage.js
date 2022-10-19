@@ -7,7 +7,6 @@ import { POST_REQUEST } from "../redux/types";
 const HomePage = () => {
   const dispatch = useDispatch();
   const posts = useSelector((state) => state.post.posts);
-  console.log(posts);
 
   useEffect(() => {
     dispatch({ type: POST_REQUEST, payload: 0 });

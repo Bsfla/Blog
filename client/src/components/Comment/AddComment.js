@@ -1,12 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 
-const AddComment = ({ onChange, onSubmit }) => {
+const AddComment = ({ handleCommentChange, handleAddComment }) => {
   return (
     <Container>
       <Title>Add Comment</Title>
-      <CommentInput onChange={(e) => onChange(e)} />
-      <SumitButton onClick={(e) => onSubmit(e)}>Submit</SumitButton>
+      <CommentInput onChange={handleCommentChange} />
+      <SumitButton onClick={handleAddComment}>Submit</SumitButton>
     </Container>
   );
 };
@@ -25,11 +25,13 @@ const Title = styled.span`
   font-size: 12px;
   margin-bottom: 13px;
 `;
+
 const CommentInput = styled.textarea`
   width: 100%;
-  height: 5em;
+  height: 5rem;
   resize: none;
-  border: solid black;
+  padding: 10px;
+  font-size: 13px;
 `;
 
 const SumitButton = styled.button`

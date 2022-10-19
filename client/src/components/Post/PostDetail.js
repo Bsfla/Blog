@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { FaPen, FaMouse } from "react-icons/fa";
+import CommentList from "../Comment/CommentList";
 import { Link } from "react-router-dom";
-import CommentContainer from "../../containers/comment/CommentContainer";
 
 const PostDetail = ({ post }) => {
   return (
@@ -32,11 +32,11 @@ const PostDetail = ({ post }) => {
         </Views>
       </DateViews>
       <PostContent dangerouslySetInnerHTML={{ __html: post.postDetail }} />
-      <CommentContainer />
+      <CommentList />
     </Wrapper>
   );
 };
-const Wrapper = styled.div`
+const Wrapper = styled.article`
   display: flex;
   flex-direction: column;
 `;

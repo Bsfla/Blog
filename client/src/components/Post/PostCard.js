@@ -1,12 +1,17 @@
 import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMouse } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const PostCard = ({ post }) => {
-  const { title, fileUrl, contents, date } = post;
+  const { title, fileUrl, contents, date, _id } = post;
+  const navigate = useNavigate();
+
+  const handleNavigateToPost = () => {
+    navigate(`/post/${_id}`);
+  };
+
   return (
-    <Card>
+    <Card onClick={handleNavigateToPost}>
       <CardImage>
         <img src={fileUrl} alt="postImg" />
       </CardImage>
@@ -25,6 +30,7 @@ const Card = styled.div`
   margin-right: 20px;
   box-shadow: 5px 5px 5px 5px gray;
   border-radius: 12px;
+  cursor: pointer;
 `;
 const CardImage = styled.div`
   width: 100%;

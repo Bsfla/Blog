@@ -1,10 +1,11 @@
 import mongoose from "mongoose";
 import moment from "moment";
 
+//Create Schema
 const CommentSchema = new mongoose.Schema({
   contents: {
     type: String,
-    required: true,
+    required: true, //필수 입력
   },
   date: {
     type: String,
@@ -18,7 +19,9 @@ const CommentSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "user",
   },
-  creatorName: { type: String },
+  creatorName: {
+    type: String,
+  },
 });
 
 const Comment = mongoose.model("comment", CommentSchema);

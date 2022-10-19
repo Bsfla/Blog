@@ -12,7 +12,7 @@ const PostList = ({ posts }) => {
   );
 };
 
-const Wrapper = styled.div`
+const Wrapper = styled.section`
   display: flex;
   margin-top: 40px;
   width: 90%;

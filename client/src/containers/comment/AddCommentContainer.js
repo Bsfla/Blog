@@ -1,11 +1,14 @@
 import React, { useState } from "react";
-import Comments from "../../components/Comment/Comments";
+import AddComment from "../../components/Comment/AddComment";
 import { useSelector, useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
 import { COMMENTUPLOAD_REQUEST } from "../../redux/types";
 
-const CommentContainer = () => {
+const AddCommentContainer = () => {
   const [contents, setContents] = useState("");
-  const { id, name, email } = useSelector((state) => state.auth.user);
+  const { userId, userName } = useSelector((state) => state.auth);
+  const { id } = useParams();
+
   const token = localStorage.getItem("token");
   const dispatch = useDispatch();
 
@@ -15,7 +18,8 @@ const CommentContainer = () => {
 
   const handleAddComment = (e) => {
     e.preventDefault();
-    const body = { id, userName: name, userId: email, token, contents };
+
+    const body = { id, userName, userId, token, contents };
     dispatch({
       type: COMMENTUPLOAD_REQUEST,
       payload: body,
@@ -23,11 +27,11 @@ const CommentContainer = () => {
   };
 
   return (
-    <Comments
+    <AddComment
       handleCommentChange={handleCommentChange}
       handleAddComment={handleAddComment}
     />
   );
 };
 
-export default CommentContainer;
+export default AddCommentContainer;
