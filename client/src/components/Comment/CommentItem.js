@@ -61,4 +61,5 @@ const CommentDescription = styled.div`
   width: 810px;
   height: auto;
   margin-top: 13px;
+  white-space: pre-line;
 `;
