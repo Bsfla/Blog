@@ -1,6 +1,9 @@
 import axios from "axios";
 import { all, call, put, takeEvery, fork } from "redux-saga/effects";
 import {
+  POSTDELETE_FAILURE,
+  POSTDELETE_REQUEST,
+  POSTDELETE_SUCCESS,
   POSTDETAILLOAD_FAILURE,
   POSTDETAILLOAD_REQUEST,
   POSTDETAILLOAD_SUCCESS,
@@ -19,7 +22,7 @@ const loadPostAPI = (payload) => {
 function* loadPosts(action) {
   try {
     const result = yield call(loadPostAPI, action.payload);
-    
+
     yield put({
       type: POSTLOADING_SUCCESS,
       payload: result.data.postFindResult,
@@ -91,8 +94,33 @@ function* loadDeatilPost(action) {
     });
   }
 }
+
+function deletePostApi(id) {
+  return axios.delete(`/api/post/${id}`);
+}
+
+function* deletPost(action) {
+  try {
+    const result = yield call(deletePostApi, action.payload);
+
+    yield put({
+      type: POSTDELETE_SUCCESS,
+      payload: result.data,
+    });
+  } catch (err) {
+    yield put({
+      type: POSTDELETE_FAILURE,
+      payload: err,
+    });
+  }
+}
+
 function* watchLoadPostDetail() {
   yield takeEvery(POSTDETAILLOAD_REQUEST, loadDeatilPost);
+}
+
+function* watchDeletePost() {
+  yield takeEvery(POSTDELETE_REQUEST, deletPost);
 }
 
 export default function* postSaga() {
@@ -100,5 +128,6 @@ export default function* postSaga() {
     fork(watchLoadPosts),
     fork(watchUploadPost),
     fork(watchLoadPostDetail),
+    fork(watchDeletePost),
   ]);
 }

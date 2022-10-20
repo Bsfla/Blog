@@ -125,9 +125,4 @@ const PostContent = styled.div`
   padding-bottom: 50px;
 `;
 
-const CommentSection = styled.div`
-  width: 100%;
-  height: 100%;
-  border-top: solid #ab47bc;
-`;
 export default PostDetail;
