@@ -4,7 +4,7 @@ import { FaPen, FaMouse } from "react-icons/fa";
 import Comments from "../../containers/comment/Comments";
 import { Link } from "react-router-dom";
 
-const PostDetail = ({ post, comments }) => {
+const PostDetail = ({ post, comments, handlePostDelete }) => {
   const { category, title, creatorId, date, views, postDetail } = post;
 
   return (
@@ -14,7 +14,7 @@ const PostDetail = ({ post, comments }) => {
           <Button>Home</Button>
         </Link>
         <Button>Edit</Button>
-        <Button>Delete</Button>
+        <Button onClick={handlePostDelete}>Delete</Button>
       </ButtonGroup>
       <PostInfo>
         <CategoryTitle>

@@ -95,8 +95,18 @@ function* loadDeatilPost(action) {
   }
 }
 
-function deletePostApi(id) {
-  return axios.delete(`/api/post/${id}`);
+function deletePostApi(payload) {
+  const token = payload.token;
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+
+  if (token) {
+    config.headers["x-auth-token"] = token;
+  }
+  return axios.delete(`/api/post/${payload.id}`, config);
 }
 
 function* deletPost(action) {
@@ -107,6 +117,8 @@ function* deletPost(action) {
       type: POSTDELETE_SUCCESS,
       payload: result.data,
     });
+
+    yield put(action.navigate("/"));
   } catch (err) {
     yield put({
       type: POSTDELETE_FAILURE,
