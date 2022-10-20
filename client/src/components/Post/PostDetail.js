@@ -1,11 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import { FaPen, FaMouse } from "react-icons/fa";
-import CommentList from "../Comment/CommentList";
-import AddCommentContainer from "../../containers/comment/AddCommentContainer";
+import Comments from "../../containers/comment/Comments";
 import { Link } from "react-router-dom";
 
-const PostDetail = ({ post }) => {
+const PostDetail = ({ post, comments }) => {
   return (
     <Wrapper>
       <ButtonGroup>
@@ -33,9 +32,7 @@ const PostDetail = ({ post }) => {
         </Views>
       </DateViews>
       <PostContent dangerouslySetInnerHTML={{ __html: post.postDetail }} />
-      <CommentSection>
-        <AddCommentContainer />
-      </CommentSection>
+      <Comments />
     </Wrapper>
   );
 };

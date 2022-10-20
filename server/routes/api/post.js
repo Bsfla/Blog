@@ -8,6 +8,7 @@ import Category from "../../models/category";
 import User from "../../models/user";
 import moment from "moment";
 import { isNullOrUndefined } from "util";
+import path from "path"; //경로 파악에 도움을줌
 
 const router = express.Router();
 
