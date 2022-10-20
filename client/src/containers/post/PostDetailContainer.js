@@ -6,11 +6,11 @@ import { useNavigate, useParams } from "react-router-dom";
 import { COMMENTLOAD_REQUEST, POSTDETAILLOAD_REQUEST } from "../../redux/types";
 
 const PostDetailContainer = () => {
-  const dispatch = useDispatch();
   const { id } = useParams();
   const navigate = useNavigate();
   const post = useSelector((state) => state.post);
-  const comments = useSelector((state) => state.comments);
+  const comments = useSelector((state) => state.comments.comments);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch({

@@ -5,6 +5,8 @@ import Comments from "../../containers/comment/Comments";
 import { Link } from "react-router-dom";
 
 const PostDetail = ({ post, comments }) => {
+  const { category, title, creatorId, date, views, postDetail } = post;
+
   return (
     <Wrapper>
       <ButtonGroup>
@@ -16,23 +18,23 @@ const PostDetail = ({ post, comments }) => {
       </ButtonGroup>
       <PostInfo>
         <CategoryTitle>
-          <Category>{post.category}</Category>
-          <Title>{post.title}</Title>
+          <Category>{category}</Category>
+          <Title>{title}</Title>
         </CategoryTitle>
-        <Writer>{post.creatorId}</Writer>
+        <Writer>{creatorId}</Writer>
       </PostInfo>
       <DateViews>
         <Date>
           <FaPen />
-          {post.date}
+          {date}
         </Date>
         <Views>
           <FaMouse />
-          {post.views}
+          {views}
         </Views>
       </DateViews>
-      <PostContent dangerouslySetInnerHTML={{ __html: post.postDetail }} />
-      <Comments />
+      <PostContent dangerouslySetInnerHTML={{ __html: postDetail }} />
+      <Comments comments={comments} />
     </Wrapper>
   );
 };

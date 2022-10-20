@@ -2,11 +2,12 @@ import AddCommentContainer from "./AddCommentContainer";
 import CommentList from "../../components/Comment/CommentList";
 import styled from "styled-components";
 
-const Comments = () => {
+const Comments = ({ comments }) => {
+  console.log(comments);
   return (
     <Wrapper>
       <AddCommentContainer />
-      <CommentList />
+      <CommentList comments={comments} />
     </Wrapper>
   );
 };
