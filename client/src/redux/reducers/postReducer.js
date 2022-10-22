@@ -1,4 +1,5 @@
 import {
+  POSTDELETE_SUCCESS,
   POSTDETAILLOAD_REQUEST,
   POSTDETAILLOAD_SUCCESS,
   POSTLOADING_FAILURE,
@@ -72,6 +73,8 @@ export const postReducer = (state = initialState, action) => {
         views: action.payload.views,
         date: action.payload.date,
       };
+
+    
     default:
       return state;
   }

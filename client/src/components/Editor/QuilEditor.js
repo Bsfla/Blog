@@ -1,9 +1,9 @@
-import React, { Component } from "react";
+import React from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import styled from "styled-components";
 
-const QuilEditor = ({ setForm, form }) => {
+const QuilEditor = ({ contents, handlePostContentsChange }) => {
   const modules = {
     toolbar: {
       container: [
@@ -25,13 +25,8 @@ const QuilEditor = ({ setForm, form }) => {
       <ReactQuillEditor
         modules={modules}
         theme="snow"
-        name="contents"
-        onChange={(e) =>
-          setForm({
-            ...form,
-            contents: e,
-          })
-        }
+        value={contents}
+        onChange={handlePostContentsChange}
       />
     </>
   );

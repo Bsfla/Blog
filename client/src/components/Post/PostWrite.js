@@ -3,25 +3,35 @@ import QuilEditor from "../Editor/QuilEditor";
 
 import styled from "styled-components";
 
-const PostWrite = ({ onChange, form, setForm, onSubmit, editorOnChange }) => {
+const PostWrite = ({
+  handlePostTitleCategoryChange,
+  handlePostContentsChange,
+  handlePostSubmit,
+  post,
+}) => {
+  const { title, category, contents } = post;
+
   return (
     <Wrapper>
       <WriteFormGroup>
         <label>Title</label>
-        <input name="title" value={form.title} onChange={(e) => onChange(e)} />
+        <input
+          name="title"
+          value={title}
+          onChange={handlePostTitleCategoryChange}
+        />
         <label>Category</label>
         <input
           name="category"
-          value={form.category}
-          onChange={(e) => onChange(e)}
+          value={category}
+          onChange={handlePostTitleCategoryChange}
         />
         <label>Content</label>
         <QuilEditor
-          setForm={setForm}
-          form={form}
-          editorOnChange={editorOnChange}
+          contents={contents}
+          handlePostContentsChange={handlePostContentsChange}
         />
-        <AddPostButton onClick={(e) => onSubmit(e)}>제출하기</AddPostButton>
+        <AddPostButton onClick={handlePostSubmit}>제출하기</AddPostButton>
       </WriteFormGroup>
     </Wrapper>
   );
