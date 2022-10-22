@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import PostWrite from "../../components/Post/PostWrite";
+import PostWriteForm from "../../components/Post/PostWriteForm";
 import { POSTUPLOAD_REQUEST } from "../../redux/types";
 import { useNavigate } from "react-router-dom";
 
@@ -42,7 +42,7 @@ const PostWriteContainer = () => {
   };
 
   return (
-    <PostWrite
+    <PostWriteForm
       handlePostTitleCategoryChange={handlePostTitleCategoryChange}
       handlePostContentsChange={handlePostContentsChange}
       handlePostSubmit={handlePostSubmit}

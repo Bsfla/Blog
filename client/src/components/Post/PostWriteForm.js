@@ -3,7 +3,7 @@ import QuilEditor from "../Editor/QuilEditor";
 
 import styled from "styled-components";
 
-const PostWrite = ({
+const PostWriteForm = ({
   handlePostTitleCategoryChange,
   handlePostContentsChange,
   handlePostSubmit,
@@ -37,7 +37,7 @@ const PostWrite = ({
   );
 };
 
-export default PostWrite;
+export default PostWriteForm;
 
 const Wrapper = styled.div`
   width: 70%;
