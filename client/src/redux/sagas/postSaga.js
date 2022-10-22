@@ -9,6 +9,9 @@ import {
   POSTDETAILLOAD_SUCCESS,
   POSTLOADING_FAILURE,
   POSTLOADING_SUCCESS,
+  POSTUPDATE_FAILURE,
+  POSTUPDATE_REQUEST,
+  POSTUPDATE_SUCCESS,
   POSTUPLOAD_FAILURE,
   POSTUPLOAD_REQUEST,
   POSTUPLOAD_SUCCESS,
@@ -127,6 +130,41 @@ function* deletPost(action) {
   }
 }
 
+function upDatePostApi(payload) {
+  const token = payload.token;
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  if (token) {
+    config.headers["x-auth-token"] = token;
+  }
+  return axios.post(`/api/post/${payload.id}/edit`, { payload }, config);
+}
+
+function* upDatePost(action) {
+  try {
+    const response = yield call(upDatePostApi, action.payload);
+
+    yield put({
+      type: POSTUPDATE_SUCCESS,
+      payload: response.data,
+    });
+
+    yield put(action.navigate(`/post/${action.payload.id}`));
+  } catch (err) {
+    yield put({
+      type: POSTUPDATE_FAILURE,
+      payload: err,
+    });
+  }
+}
+
+function* watchUpDatePost() {
+  yield takeEvery(POSTUPDATE_REQUEST, upDatePost);
+}
+
 function* watchLoadPostDetail() {
   yield takeEvery(POSTDETAILLOAD_REQUEST, loadDeatilPost);
 }
@@ -141,5 +179,6 @@ export default function* postSaga() {
     fork(watchUploadPost),
     fork(watchLoadPostDetail),
     fork(watchDeletePost),
+    fork(watchUpDatePost),
   ]);
 }

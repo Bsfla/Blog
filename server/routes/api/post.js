@@ -189,16 +189,19 @@ router.get("/:id/edit", auth, async (req, res, next) => {
 
 router.post("/:id/edit", auth, async (req, res, next) => {
   console.log(req, "api/post/:id/edit");
+  /*
   const {
-    body: { title, contents, fileUrl, id },
+    body: { title, contents, id },
   } = req;
+  */
+  const { title, contents, id } = req.body.payload;
+
   try {
     const modified_post = await Post.findByIdAndUpdate(
       id,
       {
         title,
         contents,
-        fileUrl,
         date: moment().format("YYYY-MM-DD hh:mm:ss"),
       },
       { new: true }

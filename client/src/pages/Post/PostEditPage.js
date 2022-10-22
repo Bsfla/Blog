@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import useInput from "../../hooks/useInput";
 import axios from "axios";
 import PostWriteForm from "../../components/Post/PostWriteForm";
-import { POSTDETAILLOAD_REQUEST } from "../../redux/types";
+import { POSTUPDATE_REQUEST } from "../../redux/types";
 import { useNavigate, useParams } from "react-router-dom";
 
 const PostEditPage = () => {
@@ -16,7 +16,7 @@ const PostEditPage = () => {
   const [contents, setContents] = useState("");
 
   const { id } = useParams();
-
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handlePostContentsChange = (e) => {
@@ -26,15 +26,16 @@ const PostEditPage = () => {
   const handlePostSubmit = (e) => {
     e.preventDefault();
     const token = localStorage.getItem("token");
-    const body = { title, category, contents, token };
 
-    /*
+    const body = { title, category, contents, id, token };
+
+    console.log(body);
+
     dispatch({
-      type: POSTUPLOAD_REQUEST,
+      type: POSTUPDATE_REQUEST,
       payload: body,
       navigate,
     });
-    */
   };
 
   useEffect(() => {
