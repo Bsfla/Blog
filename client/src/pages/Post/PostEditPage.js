@@ -1,47 +1,62 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import PostWriteForm from "../../components/Post/PostWriteForm";
-import { POSTUPLOAD_REQUEST } from "../../redux/types";
-import { useNavigate } from "react-router-dom";
+import { POSTDETAILLOAD_REQUEST } from "../../redux/types";
+import { useNavigate, useParams } from "react-router-dom";
 
 const PostEditPage = () => {
-  const [post, setPost] = useState({
+  const [editPost, setEditPost] = useState({
     title: "",
     category: "",
     contents: "",
   });
 
+  const post = useSelector((state) => state.post);
+
+  console.log(post);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handlePostTitleCategoryChange = (e) => {
-    setPost({
-      ...post,
+    setEditPost({
+      ...editPost,
       [e.target.name]: e.target.value,
     });
   };
 
   const handlePostContentsChange = (e) => {
-    setPost({
-      ...post,
+    setEditPost({
+      ...editPost,
       contents: e,
     });
   };
 
   const handlePostSubmit = (e) => {
     e.preventDefault();
-    const { title, category, contents } = post;
+    const { title, category, contents } = editPost;
     const token = localStorage.getItem("token");
     const body = { title, category, contents, token };
 
+    console.log(body);
+
+    /*
     dispatch({
       type: POSTUPLOAD_REQUEST,
       payload: body,
       navigate,
     });
+    */
   };
 
-  return <div>안녕하세여</div>;
+  return (
+    <PostWriteForm
+      handlePostTitleCategoryChange={handlePostTitleCategoryChange}
+      handlePostContentsChange={handlePostContentsChange}
+      handlePostSubmit={handlePostSubmit}
+      post={editPost}
+    />
+  );
 };
 
 export default PostEditPage;

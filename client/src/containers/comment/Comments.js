@@ -1,9 +1,23 @@
 import AddCommentContainer from "./AddCommentContainer";
 import CommentList from "../../components/Comment/CommentList";
+import { COMMENTLOAD_REQUEST } from "../../redux/types";
 import styled from "styled-components";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 
-const Comments = ({ comments }) => {
-  console.log(comments);
+const Comments = () => {
+  const dispatch = useDispatch();
+  const comments = useSelector((state) => state.comments.comments);
+  const { id } = useParams();
+
+  useEffect(() => {
+    dispatch({
+      type: COMMENTLOAD_REQUEST,
+      payload: id,
+    });
+  }, [dispatch, id]);
+
   return (
     <Wrapper>
       <AddCommentContainer />
@@ -18,4 +32,4 @@ const Wrapper = styled.div`
   border-top: solid #ab47bc;
 `;
 
-export default Comments;
+export default React.memo(Comments);

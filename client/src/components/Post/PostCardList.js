@@ -6,7 +6,7 @@ const PostList = ({ posts }) => {
   return (
     <Wrapper>
       {posts.map((post) => (
-        <PostCard post={post} />
+        <PostCard post={post} key={post._id} />
       ))}
     </Wrapper>
   );

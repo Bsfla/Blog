@@ -12,7 +12,7 @@ import {
 
 const initialState = {
   posts: [],
-  postDetail: "",
+  contents: "",
   error: "",
   creatorId: "",
   title: "",
@@ -66,7 +66,7 @@ export const postReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        postDetail: action.payload.contents,
+        contents: action.payload.contents,
         creatorId: action.payload.creator.name,
         title: action.payload.title,
         category: action.payload.category.categoryName,
@@ -74,7 +74,6 @@ export const postReducer = (state = initialState, action) => {
         date: action.payload.date,
       };
 
-    
     default:
       return state;
   }

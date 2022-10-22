@@ -13,7 +13,6 @@ const PostDetailContainer = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const post = useSelector((state) => state.post);
-  const comments = useSelector((state) => state.comments.comments);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -21,11 +20,6 @@ const PostDetailContainer = () => {
       type: POSTDETAILLOAD_REQUEST,
       payload: id,
       navigate,
-    });
-
-    dispatch({
-      type: COMMENTLOAD_REQUEST,
-      payload: id,
     });
   }, [dispatch, id, navigate]);
 
@@ -43,13 +37,7 @@ const PostDetailContainer = () => {
     });
   };
 
-  return (
-    <PostDetail
-      post={post}
-      comments={comments}
-      handlePostDelete={handlePostDelete}
-    />
-  );
+  return <PostDetail post={post} handlePostDelete={handlePostDelete} id={id} />;
 };
 
 export default PostDetailContainer;

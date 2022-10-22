@@ -4,8 +4,8 @@ import { FaPen, FaMouse } from "react-icons/fa";
 import Comments from "../../containers/comment/Comments";
 import { Link } from "react-router-dom";
 
-const PostDetail = ({ post, comments, handlePostDelete }) => {
-  const { category, title, creatorId, date, views, postDetail } = post;
+const PostDetail = ({ post, handlePostDelete, id }) => {
+  const { category, title, creatorId, date, views, contents } = post;
 
   return (
     <Wrapper>
@@ -13,7 +13,9 @@ const PostDetail = ({ post, comments, handlePostDelete }) => {
         <Link to={"/"}>
           <Button>Home</Button>
         </Link>
-        <Button>Edit</Button>
+        <Link to={`/post/${id}/edit`}>
+          <Button>Edit</Button>
+        </Link>
         <Button onClick={handlePostDelete}>Delete</Button>
       </ButtonGroup>
       <PostInfo>
@@ -33,8 +35,8 @@ const PostDetail = ({ post, comments, handlePostDelete }) => {
           {views}
         </Views>
       </DateViews>
-      <PostContent dangerouslySetInnerHTML={{ __html: postDetail }} />
-      <Comments comments={comments} />
+      <PostContent dangerouslySetInnerHTML={{ __html: contents }} />
+      <Comments />
     </Wrapper>
   );
 };
