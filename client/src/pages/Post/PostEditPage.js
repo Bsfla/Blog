@@ -1,22 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
 import PostWriteForm from "../../components/Post/PostWriteForm";
 import { POSTDETAILLOAD_REQUEST } from "../../redux/types";
 import { useNavigate, useParams } from "react-router-dom";
 
 const PostEditPage = () => {
+  const post = useSelector((state) => state.post);
   const [editPost, setEditPost] = useState({
     title: "",
     category: "",
     contents: "",
   });
 
-  const post = useSelector((state) => state.post);
-
-  console.log(post);
+  const { id } = useParams();
 
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const handlePostTitleCategoryChange = (e) => {
     setEditPost({
@@ -38,8 +37,6 @@ const PostEditPage = () => {
     const token = localStorage.getItem("token");
     const body = { title, category, contents, token };
 
-    console.log(body);
-
     /*
     dispatch({
       type: POSTUPLOAD_REQUEST,
@@ -48,6 +45,17 @@ const PostEditPage = () => {
     });
     */
   };
+
+  useEffect(() => {
+    setEditPost({
+      ...editPost,
+      title: post.title,
+      category: post.category,
+      contents: post.contents,
+    });
+  }, []);
+
+  console.log(editPost);
 
   return (
     <PostWriteForm

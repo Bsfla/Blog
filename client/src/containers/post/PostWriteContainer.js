@@ -1,36 +1,27 @@
 import React, { useState } from "react";
+import useInput from "../../hooks/useInput";
 import { useDispatch } from "react-redux";
 import PostWriteForm from "../../components/Post/PostWriteForm";
 import { POSTUPLOAD_REQUEST } from "../../redux/types";
 import { useNavigate } from "react-router-dom";
 
 const PostWriteContainer = () => {
-  const [post, setPost] = useState({
+  const [{ title, category }, handlePostTitleCategoryChange] = useInput({
     title: "",
     category: "",
-    contents: "",
   });
+  const [contents, setContents] = useState("");
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handlePostTitleCategoryChange = (e) => {
-    setPost({
-      ...post,
-      [e.target.name]: e.target.value,
-    });
-  };
-
   const handlePostContentsChange = (e) => {
-    setPost({
-      ...post,
-      contents: e,
-    });
+    setContents(e);
   };
 
   const handlePostSubmit = (e) => {
     e.preventDefault();
-    const { title, category, contents } = post;
+
     const token = localStorage.getItem("token");
     const body = { title, category, contents, token };
 
@@ -46,7 +37,7 @@ const PostWriteContainer = () => {
       handlePostTitleCategoryChange={handlePostTitleCategoryChange}
       handlePostContentsChange={handlePostContentsChange}
       handlePostSubmit={handlePostSubmit}
-      post={post}
+      post={{ title, category, contents }}
     />
   );
 };
