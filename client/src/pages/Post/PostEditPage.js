@@ -1,39 +1,30 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import useInput from "../../hooks/useInput";
 import axios from "axios";
 import PostWriteForm from "../../components/Post/PostWriteForm";
 import { POSTDETAILLOAD_REQUEST } from "../../redux/types";
 import { useNavigate, useParams } from "react-router-dom";
 
 const PostEditPage = () => {
-  const post = useSelector((state) => state.post);
-  const [editPost, setEditPost] = useState({
-    title: "",
-    category: "",
-    contents: "",
-  });
+  const [{ title, category }, handlePostTitleCategoryChange, setTitleCategory] =
+    useInput({
+      title: "",
+      category: "",
+    });
+
+  const [contents, setContents] = useState("");
 
   const { id } = useParams();
 
   const dispatch = useDispatch();
 
-  const handlePostTitleCategoryChange = (e) => {
-    setEditPost({
-      ...editPost,
-      [e.target.name]: e.target.value,
-    });
-  };
-
   const handlePostContentsChange = (e) => {
-    setEditPost({
-      ...editPost,
-      contents: e,
-    });
+    setContents(e);
   };
 
   const handlePostSubmit = (e) => {
     e.preventDefault();
-    const { title, category, contents } = editPost;
     const token = localStorage.getItem("token");
     const body = { title, category, contents, token };
 
@@ -47,22 +38,30 @@ const PostEditPage = () => {
   };
 
   useEffect(() => {
-    setEditPost({
-      ...editPost,
-      title: post.title,
-      category: post.category,
-      contents: post.contents,
-    });
-  }, []);
+    const getFetchingPostDetail = async () => {
+      try {
+        const { data } = await axios.get(`/api/post/${id}`);
 
-  console.log(editPost);
+        setTitleCategory({
+          title: data.title,
+          category: data.category.categoryName,
+        });
+
+        setContents(data.contents);
+      } catch (err) {
+        alert("에러가 발생했습니다");
+      }
+    };
+
+    getFetchingPostDetail();
+  }, []);
 
   return (
     <PostWriteForm
       handlePostTitleCategoryChange={handlePostTitleCategoryChange}
       handlePostContentsChange={handlePostContentsChange}
       handlePostSubmit={handlePostSubmit}
-      post={editPost}
+      post={{ title, category, contents }}
     />
   );
 };

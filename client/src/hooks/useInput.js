@@ -10,7 +10,7 @@ const useInput = (initialValue) => {
     });
   };
 
-  return [value, onChange];
+  return [value, onChange, setValue];
 };
 
 export default useInput;
