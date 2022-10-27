@@ -10,6 +10,7 @@ const PostWriteContainer = () => {
     title: "",
     category: "",
   });
+  
   const [contents, setContents] = useState("");
 
   const dispatch = useDispatch();

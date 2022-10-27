@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import {
-  COMMENTLOAD_REQUEST,
   POSTDELETE_REQUEST,
   POSTDETAILLOAD_REQUEST,
 } from "../../redux/types";

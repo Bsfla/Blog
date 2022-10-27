@@ -21,7 +21,9 @@ function App() {
 
 const Wrapper = styled.div`
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+
   padding-left: 70px;
   padding-right: 70px;
   min-height: 50rem;
