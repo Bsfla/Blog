@@ -4,6 +4,7 @@ import PostWritePage from "../pages/Post/PostWritePage";
 import PostDetailPage from "../pages/Post/PostDetailPage";
 import PostEditPage from "../pages/Post/PostEditPage";
 import CategoryPage from "../pages/CategoryPage";
+import SearchPage from "../pages/SearchPage";
 
 const Routing = () => {
   return (
@@ -13,6 +14,7 @@ const Routing = () => {
       <Route path="/post/:id" element={<PostDetailPage />} />
       <Route path="/post/:id/edit" element={<PostEditPage />} />
       <Route path="/category/:categoryResult" element={<CategoryPage />} />
+      <Route path="/search/:searchResult" element={<SearchPage />} />
     </Routes>
   );
 };
