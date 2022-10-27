@@ -25,10 +25,11 @@ const loadPostAPI = (payload) => {
 function* loadPosts(action) {
   try {
     const result = yield call(loadPostAPI, action.payload);
+    console.log(result.data);
 
     yield put({
       type: POSTLOADING_SUCCESS,
-      payload: result.data.postFindResult,
+      payload: result.data,
     });
   } catch (e) {
     yield put({

@@ -1,12 +1,13 @@
 import React from "react";
 import styled from "styled-components";
+import Category from "./Category";
 
-const CategoryList = () => {
+const CategoryList = ({ categories }) => {
   return (
     <Wrapper>
-      <StlyedCategory>
-        <span>#음악</span>
-      </StlyedCategory>
+      {categories.map((category) => (
+        <Category category={category} key={category._id} />
+      ))}
     </Wrapper>
   );
 };
@@ -21,18 +22,4 @@ const Wrapper = styled.section`
   justify-content: center;
   border-bottom: solid;
   border-bottom-color: #ab47bc;
-`;
-
-const StlyedCategory = styled.div`
-  width: 5rem;
-  height: 30px;
-  padding-left: 10px;
-  padding-right: 10px;
-  border-radius: 15px;
-  background: #0097a7;
-  color: white;
-  margin-right: 15px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 `;

@@ -12,6 +12,7 @@ import {
 
 const initialState = {
   posts: [],
+  categories: [],
   contents: "",
   error: "",
   creatorId: "",
@@ -32,7 +33,8 @@ export const postReducer = (state = initialState, action) => {
     case POSTLOADING_SUCCESS:
       return {
         ...state,
-        posts: [...action.payload],
+        posts: [...action.payload.postFindResult],
+        categories: [...action.payload.categoryFindResult],
         isLoadig: false,
       };
     case POSTLOADING_FAILURE:

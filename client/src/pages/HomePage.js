@@ -8,6 +8,7 @@ import CategoryList from "../components/Category/CategoryList";
 const HomePage = () => {
   const dispatch = useDispatch();
   const posts = useSelector((state) => state.post.posts);
+  const categories = useSelector((state) => state.post.categories);
 
   useEffect(() => {
     dispatch({ type: POST_REQUEST, payload: 0 });
@@ -15,7 +16,7 @@ const HomePage = () => {
 
   return (
     <>
-      <CategoryList />
+      <CategoryList categories={categories} />
       <PostList posts={posts} />
     </>
   );
