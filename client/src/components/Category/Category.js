@@ -1,11 +1,14 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const Category = ({ category }) => {
   return (
-    <StlyedCategory>
-      <span>#{category.categoryName}</span>
-    </StlyedCategory>
+    <Link to={`/category/${category.categoryName}`}>
+      <StlyedCategory>
+        <span>#{category.categoryName}</span>
+      </StlyedCategory>
+    </Link>
   );
 };
 

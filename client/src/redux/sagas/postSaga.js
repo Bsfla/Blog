@@ -1,6 +1,9 @@
 import axios from "axios";
 import { all, call, put, takeEvery, fork } from "redux-saga/effects";
 import {
+  CATEGORY_REQUEST,
+  CATEGORY_REQUEST_FAILURE,
+  CATEGORY_REQUEST_SUCCESS,
   POSTDELETE_FAILURE,
   POSTDELETE_REQUEST,
   POSTDELETE_SUCCESS,
@@ -162,6 +165,30 @@ function* upDatePost(action) {
   }
 }
 
+function categoryLoadApi(payload) {
+  return axios.get(`/api/post/category/${payload}`);
+}
+
+function* categoryLoad(action) {
+  try {
+    const response = yield call(categoryLoadApi, action.payload);
+
+    yield put({
+      type: CATEGORY_REQUEST_SUCCESS,
+      payload: response.data.posts,
+    });
+  } catch (err) {
+    yield put({
+      type: CATEGORY_REQUEST_FAILURE,
+      payload: err,
+    });
+  }
+}
+
+function* watchCategoryLoad() {
+  yield takeEvery(CATEGORY_REQUEST, categoryLoad);
+}
+
 function* watchUpDatePost() {
   yield takeEvery(POSTUPDATE_REQUEST, upDatePost);
 }
@@ -181,5 +208,6 @@ export default function* postSaga() {
     fork(watchLoadPostDetail),
     fork(watchDeletePost),
     fork(watchUpDatePost),
+    fork(watchCategoryLoad),
   ]);
 }

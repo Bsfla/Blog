@@ -1,4 +1,6 @@
 import {
+  CATEGORY_REQUEST_FAILURE,
+  CATEGORY_REQUEST_SUCCESS,
   POSTDELETE_SUCCESS,
   POSTDETAILLOAD_REQUEST,
   POSTDETAILLOAD_SUCCESS,
@@ -74,6 +76,17 @@ export const postReducer = (state = initialState, action) => {
         category: action.payload.category.categoryName,
         views: action.payload.views,
         date: action.payload.date,
+      };
+
+    case CATEGORY_REQUEST_SUCCESS:
+      return {
+        ...state,
+        posts: [...action.payload],
+      };
+    case CATEGORY_REQUEST_FAILURE:
+      return {
+        ...state,
+        error: action.payload,
       };
 
     default:
