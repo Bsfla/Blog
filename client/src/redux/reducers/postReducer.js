@@ -10,6 +10,8 @@ import {
   POSTUPLOAD_REQUEST,
   POSTUPLOAD_SUCCESS,
   POST_REQUEST,
+  SEARCH_REQUEST_FAILURE,
+  SEARCH_REQUEST_SUCCESS,
 } from "../types";
 
 const initialState = {
@@ -84,6 +86,17 @@ export const postReducer = (state = initialState, action) => {
         posts: [...action.payload],
       };
     case CATEGORY_REQUEST_FAILURE:
+      return {
+        ...state,
+        error: action.payload,
+      };
+
+    case SEARCH_REQUEST_SUCCESS:
+      return {
+        ...state,
+        posts: [...action.payload],
+      };
+    case SEARCH_REQUEST_FAILURE:
       return {
         ...state,
         error: action.payload,

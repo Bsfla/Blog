@@ -1,12 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 import { BiSearchAlt2 } from "react-icons/bi";
 
 const SearchInput = () => {
+  const [inputValue, setInputValue] = useState("");
+  const navigate = useNavigate();
+
+  const handleInputChange = (e) => {
+    setInputValue(e.currentTarget.value);
+  };
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+
+    navigate(`/search/${inputValue}`);
+    setInputValue("");
+  };
+
   return (
-    <SearchForm>
+    <SearchForm onSubmit={handleFormSubmit}>
       <BiSearchAlt2 size={25} />
-      <Input />
+      <Input value={inputValue} onChange={handleInputChange} />
     </SearchForm>
   );
 };

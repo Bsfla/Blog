@@ -8,6 +8,7 @@ import cors from "cors";
 import postsRoutes from "./routes/api/post";
 import userRoutes from "./routes/api/user";
 import authRoutes from "./routes/api/auth";
+import searchRoutes from "./routes/api/search";
 import morgan from "morgan";
 
 const config = require("./config/key");
@@ -33,5 +34,6 @@ app.get("/");
 app.use("/api/post", postsRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api/auth", authRoutes);
+app.use("/api/search", searchRoutes);
 
 export default app;
