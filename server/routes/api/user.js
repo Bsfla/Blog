@@ -76,17 +76,17 @@ router.post("/", (req, res) => {
 
 router.post("/:userName/profile", async (req, res) => {
   try {
-    const { previousPassword, password, rePassword, userId } = req.body;
+    const { password, newPassWord, confirmPassword, userId } = req.body;
     console.log(req.body, "userName Profile");
     const result = await User.findById(userId, "password");
 
-    bcrypt.compare(previousPassword, result.password).then((isMatch) => {
+    bcrypt.compare(password, result.password).then((isMatch) => {
       if (!isMatch) {
         return res.status(400).json({
           match_msg: "기존 비밀번호와 일치하지 않습니다.",
         });
       } else {
-        if (password === rePassword) {
+        if (newPassWord === confirmPassword) {
           bcrypt.genSalt(10, (err, salt) => {
             bcrypt.hash(password, salt, (err, hash) => {
               if (err) throw err;

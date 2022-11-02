@@ -23,10 +23,11 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-
+  position: relative;
   padding-left: 70px;
   padding-right: 70px;
-  min-height: 50rem;
+  padding-bottom: 10rem;
+  min-height: 100%;
   background-color: #eeeeee;
 `;
 

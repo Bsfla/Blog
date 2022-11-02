@@ -1,21 +1,43 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import styled from "styled-components";
 import PostCard from "./PostCard";
 
-const PostList = ({ posts }) => {
+const PostList = forwardRef((props, ref) => {
   return (
     <Wrapper>
-      {posts.map((post) => (
-        <PostCard post={post} key={post._id} />
-      ))}
+      <PostListWrapper>
+        {props?.posts.map((post) => (
+          <PostCard post={post} key={post._id} />
+        ))}
+      </PostListWrapper>
+      <div className="observer" ref={ref}>
+        Load more
+      </div>
     </Wrapper>
   );
-};
+});
 
 const Wrapper = styled.section`
   display: flex;
+  flex-direction: column;
+  align-items: center;
   margin-top: 40px;
-  width: 90%;
+  width: 100%;
+  height: 100%;
+  position: relative;
+
+  .observer {
+    position: relative;
+    bottom: 0;
+  }
+`;
+
+const PostListWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 100%;
 `;
 
 export default PostList;

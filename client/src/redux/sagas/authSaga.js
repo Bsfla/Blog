@@ -7,6 +7,7 @@ import {
   LOGOUT_FAILURE,
   LOGOUT_REQUEST,
   LOGOUT_SUCCESS,
+  PASSWORD_EDIT_REQUEST,
   REGISTER_FAILURE,
   REGISTER_REQUEST,
   REGISTER_SUCCESS,
@@ -92,6 +93,27 @@ function* loadingUser(action) {
   }
 }
 
+function passWordApi(payload) {
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  if (payload.token) {
+    config.headers["x-auth-token"] = payload.token;
+  }
+  return axios.post(`api/user/${payload.userName}/profile`, payload, config);
+}
+
+function* passwordEdit(action) {
+  try {
+    const result = yield call(passWordApi, action.payload);
+    console.log(result);
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 function* watchLogoutUser() {
   yield takeEvery(LOGOUT_REQUEST, logoutUser);
 }
@@ -108,11 +130,16 @@ function* watchLoadingUser() {
   yield takeEvery(USERLOAING_REQUEST, loadingUser);
 }
 
+function* watchPassWordEdit() {
+  yield takeEvery(PASSWORD_EDIT_REQUEST, passwordEdit);
+}
+
 export default function* authSaga() {
   yield all([
     fork(watchLoginUser),
     fork(watchLogoutUser),
     fork(watchRegisterUser),
     fork(watchLoadingUser),
+    fork(watchPassWordEdit),
   ]);
 }

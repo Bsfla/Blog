@@ -28,6 +28,7 @@ const Card = styled.div`
   width: 18rem;
   height: 21rem;
   margin-right: 20px;
+  margin-top: 30px;
   box-shadow: 5px 5px 5px 5px gray;
   border-radius: 12px;
   cursor: pointer;

@@ -5,6 +5,7 @@ import PostDetailPage from "../pages/Post/PostDetailPage";
 import PostEditPage from "../pages/Post/PostEditPage";
 import CategoryPage from "../pages/CategoryPage";
 import SearchPage from "../pages/SearchPage";
+import ProfilePage from "../pages/ProfilePage";
 
 const Routing = () => {
   return (
@@ -15,6 +16,7 @@ const Routing = () => {
       <Route path="/post/:id/edit" element={<PostEditPage />} />
       <Route path="/category/:categoryResult" element={<CategoryPage />} />
       <Route path="/search/:searchResult" element={<SearchPage />} />
+      <Route path="/profile" element={<ProfilePage />} />
     </Routes>
   );
 };
