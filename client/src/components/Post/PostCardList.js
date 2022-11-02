@@ -10,9 +10,7 @@ const PostList = forwardRef((props, ref) => {
           <PostCard post={post} key={post._id} />
         ))}
       </PostListWrapper>
-      <div className="observer" ref={ref}>
-        Load more
-      </div>
+      <div className="observer" ref={ref} />
     </Wrapper>
   );
 });

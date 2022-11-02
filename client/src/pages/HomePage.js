@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useCallback } from "react";
-import Spinner from "../components/Spinner/Spinner";
 import { useSelector, useDispatch } from "react-redux";
 import PostList from "../components/Post/PostCardList";
 import { POST_REQUEST } from "../redux/types";
