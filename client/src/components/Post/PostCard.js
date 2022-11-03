@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 
 const PostCard = ({ post }) => {
   const { title, fileUrl, contents, date, _id } = post;
@@ -23,17 +23,6 @@ const PostCard = ({ post }) => {
     </Card>
   );
 };
-
-const SlideUp = keyframes`
-  from {
-    opacity:0;
-    transform: translateY(5%);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-`;
 
 const Card = styled.div`
   width: 18rem;
@@ -79,14 +68,6 @@ const Carddescription = styled.div`
 const CardTitle = styled.span`
   font-weight: bold;
   font-size: 15px;
-`;
-const CardCommentView = styled.button`
-  width: 25em;
-  padding: 10px;
-  background-color: "#3d5afe";
-  color: white;
-  display: block;
-  margin: 0 auto;
 `;
 
 export default PostCard;

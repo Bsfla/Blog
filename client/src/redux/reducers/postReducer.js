@@ -68,6 +68,7 @@ export const postReducer = (state = initialState, action) => {
     case POSTDETAILLOAD_REQUEST:
       return {
         ...state,
+        posts: [],
         loading: true,
       };
     case POSTDETAILLOAD_SUCCESS:
