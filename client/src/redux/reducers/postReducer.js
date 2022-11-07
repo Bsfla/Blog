@@ -1,7 +1,6 @@
 import {
   CATEGORY_REQUEST_FAILURE,
   CATEGORY_REQUEST_SUCCESS,
-  POSTDELETE_SUCCESS,
   POSTDETAILLOAD_REQUEST,
   POSTDETAILLOAD_SUCCESS,
   POSTLOADING_FAILURE,
@@ -10,6 +9,7 @@ import {
   POSTUPLOAD_REQUEST,
   POSTUPLOAD_SUCCESS,
   POST_REQUEST,
+  POST_INIT,
   SEARCH_REQUEST_FAILURE,
   SEARCH_REQUEST_SUCCESS,
 } from "../types";
@@ -47,6 +47,11 @@ export const postReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
+      };
+    case POST_INIT:
+      return {
+        ...state,
+        posts: [],
       };
 
     case POSTUPLOAD_REQUEST:

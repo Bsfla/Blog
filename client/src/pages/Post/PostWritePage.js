@@ -1,20 +1,46 @@
-import React from "react";
-import styled from "styled-components";
-import PostWriteContainer from "../../containers/post/PostWriteContainer";
+import React, { useState } from "react";
+import useInput from "../../hooks/useInput";
+import { useDispatch } from "react-redux";
+import PostWriteForm from "../../components/Post/PostWriteForm";
+import { POSTUPLOAD_REQUEST } from "../../redux/types";
+import { useNavigate } from "react-router-dom";
 
 const PostWritePage = () => {
+  const [{ title, category }, handlePostTitleCategoryChange] = useInput({
+    title: "",
+    category: "",
+  });
+
+  const [contents, setContents] = useState("");
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handlePostContentsChange = (e) => {
+    setContents(e);
+  };
+
+  const handlePostSubmit = (e) => {
+    e.preventDefault();
+
+    const token = localStorage.getItem("token");
+    const body = { title, category, contents, token };
+
+    dispatch({
+      type: POSTUPLOAD_REQUEST,
+      payload: body,
+      navigate,
+    });
+  };
+
   return (
-    <Wrapper>
-      <PostWriteContainer />
-    </Wrapper>
+    <PostWriteForm
+      handlePostTitleCategoryChange={handlePostTitleCategoryChange}
+      handlePostContentsChange={handlePostContentsChange}
+      handlePostSubmit={handlePostSubmit}
+      post={{ title, category, contents }}
+    />
   );
 };
-
-const Wrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  height: 100vh;
-  margin-bottom: 70px;
-`;
 
 export default PostWritePage;

@@ -1,6 +1,5 @@
 import React from "react";
 import QuilEditor from "../Editor/QuilEditor";
-
 import styled from "styled-components";
 
 const PostWriteForm = ({

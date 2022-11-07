@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import useInput from "../../hooks/useInput";
 import axios from "axios";
 import PostWriteForm from "../../components/Post/PostWriteForm";
@@ -29,8 +29,6 @@ const PostEditPage = () => {
 
     const body = { title, category, contents, id, token };
 
-    console.log(body);
-
     dispatch({
       type: POSTUPDATE_REQUEST,
       payload: body,
@@ -55,7 +53,7 @@ const PostEditPage = () => {
     };
 
     getFetchingPostDetail();
-  }, []);
+  }, [id]);
 
   return (
     <PostWriteForm

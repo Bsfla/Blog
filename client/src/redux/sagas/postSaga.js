@@ -18,6 +18,7 @@ import {
   POSTUPLOAD_FAILURE,
   POSTUPLOAD_REQUEST,
   POSTUPLOAD_SUCCESS,
+  POST_INIT,
   POST_REQUEST,
   SEARCH_REQUEST,
   SEARCH_REQUEST_FAILURE,
@@ -29,9 +30,10 @@ const loadPostAPI = (payload) => {
 };
 
 function* loadPosts(action) {
+  if (action.payload === 0) yield put({ type: POST_INIT });
+
   try {
     const result = yield call(loadPostAPI, action.payload);
-    console.log(result);
 
     yield put({
       type: POSTLOADING_SUCCESS,
